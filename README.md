@@ -212,6 +212,17 @@ Safe Client Response
 |Logger integration|	✓|	✗|	✗|
 |Trace ID support|	✓|	✗|	✗|
 
+# Examples
+See:
+```
+examples/
+```
+Includes:
+- Echo REST API
+- Validation example
+- Database example
+
+
 # Versioning
 
 Uses Semantic Versioning:
