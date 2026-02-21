@@ -1,5 +1,9 @@
 # Go Error Framework
 
+[![codecov](https://codecov.io/gh/krisalay/error-framework/branch/main/graph/badge.svg)](https://codecov.io/gh/krisalay/error-framework)
+
+[![Go Report Card](https://goreportcard.com/badge/github.com/krisalay/error-framework)](https://goreportcard.com/report/github.com/krisalay/error-framework)
+
 Production‑grade centralized error management framework for Go services with built‑in support for:
 
 * Echo framework

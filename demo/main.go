@@ -2,8 +2,6 @@ package main
 
 import (
 	"errors"
-	"net/http"
-	"time"
 
 	"github.com/go-playground/validator/v10"
 	echoadapter "github.com/krisalay/error-framework/adapters/echo"
@@ -84,7 +82,7 @@ func registerRoutes(e *echo.Echo) {
 
 	e.GET("/custom-error", customErrorHandler)
 
-	e.GET("/goroutine-panic", goroutinePanicHandler)
+	// e.GET("/goroutine-panic", goroutinePanicHandler)
 }
 
 // SUCCESS DEMO
@@ -150,21 +148,21 @@ func customErrorHandler(c echo.Context) error {
 }
 
 // GOROUTINE PANIC DEMO
-func goroutinePanicHandler(c echo.Context) error {
+// func goroutinePanicHandler(c echo.Context) error {
 
-	ctx := c.Request().Context()
+// 	ctx := c.Request().Context()
 
-	go func() {
+// 	go func() {
 
-		defer framework.Recover(ctx)
+// 		defer framework.Recover(ctx)
 
-		time.Sleep(1 * time.Second)
+// 		time.Sleep(1 * time.Second)
 
-		panic("goroutine panic demo")
+// 		panic("goroutine panic demo")
 
-	}()
+// 	}()
 
-	return c.JSON(http.StatusOK, map[string]string{
-		"message": "goroutine started",
-	})
-}
+// 	return c.JSON(http.StatusOK, map[string]string{
+// 		"message": "goroutine started",
+// 	})
+// }

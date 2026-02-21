@@ -77,6 +77,10 @@ func NewZapLogger(config Config) (*ZapLogger, error) {
 
 func (z *ZapLogger) Log(err *core.AppError) {
 
+	if err == nil {
+		return
+	}
+
 	fields := []zap.Field{
 		zap.String("code", err.Code),
 		zap.Int("status", err.Status),
@@ -86,18 +90,15 @@ func (z *ZapLogger) Log(err *core.AppError) {
 	}
 
 	if err.StackTrace != "" {
-		fields = append(fields,
-			zap.String("stacktrace", err.StackTrace))
+		fields = append(fields, zap.String("stacktrace", err.StackTrace))
 	}
 
 	if err.Err != nil {
-		fields = append(fields,
-			zap.Error(err.Err))
+		fields = append(fields, zap.Error(err.Err))
 	}
 
 	if err.Details != nil {
-		fields = append(fields,
-			zap.Any("details", err.Details))
+		fields = append(fields, zap.Any("details", err.Details))
 	}
 
 	switch err.Level {

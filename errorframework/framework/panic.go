@@ -1,47 +1,47 @@
 package framework
 
-import (
-	"context"
+// import (
+// 	"context"
 
-	"github.com/krisalay/error-framework/core"
-)
+// 	"github.com/krisalay/error-framework/core"
+// )
 
-// Recover converts panic into AppError and logs it
-func Recover(ctx context.Context) *core.AppError {
+// func Recover(ctx context.Context) *core.AppError {
 
-	recovered := recover()
+// 	recovered := recover()
 
-	if recovered == nil {
-		return nil
-	}
+// 	if recovered == nil {
+// 		return nil
+// 	}
 
-	f := get()
+// 	appErr := core.New().
+// 		WithMessage("Internal server error").
+// 		WithCode(core.CodeInternalError).
+// 		WithLevel(core.LevelFatal).
+// 		WithSensitive(true).
+// 		WithDetail("panic", recovered).
+// 		Build()
 
-	appErr := core.New().
-		WithMessage("Internal server error").
-		WithCode(core.CodeInternalError).
-		WithLevel(core.LevelFatal).
-		WithSensitive(true).
-		WithDetail("panic", recovered).
-		Build()
+// 	// SAFE access to instance (DO NOT call get())
+// 	if instance != nil && instance.manager != nil {
+// 		instance.manager.Handle(ctx, appErr)
+// 	}
 
-	f.manager.Handle(ctx, appErr)
+// 	return appErr
+// }
 
-	return appErr
-}
+// func RecoverAndWrap(ctx context.Context, message string) *core.AppError {
 
-func RecoverAndWrap(ctx context.Context, message string) *core.AppError {
+// 	recovered := recover()
 
-	recovered := recover()
+// 	if recovered == nil {
+// 		return nil
+// 	}
 
-	if recovered == nil {
-		return nil
-	}
-
-	return Wrap(
-		core.New().
-			WithDetail("panic", recovered).
-			Build(),
-		message,
-	)
-}
+// 	return Wrap(
+// 		core.New().
+// 			WithDetail("panic", recovered).
+// 			Build(),
+// 		message,
+// 	)
+// }

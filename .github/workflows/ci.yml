@@ -4,27 +4,48 @@ on:
   push:
     branches: [ main ]
   pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
 
 jobs:
   test:
+    name: Test and Coverage
     runs-on: ubuntu-latest
 
     steps:
 
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
     - name: Setup Go
       uses: actions/setup-go@v5
       with:
-        go-version: 1.22
+        go-version: '1.24'
 
-    - name: Install dependencies
+    - name: Download dependencies
       run: go mod tidy
 
-    - name: Run tests
-      run: go test ./...
-
-    - name: Run lint
+    - name: Run tests with coverage
       run: |
-        go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-        golangci-lint run
+        go test ./... \
+          -coverprofile=coverage.out \
+          -covermode=atomic
+
+    - name: Show coverage summary
+      run: go tool cover -func=coverage.out
+    
+    - name: Fail if coverage < 80%
+      run: |
+        COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}' | sed 's/%//')
+        if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+          echo "Coverage too low"
+          exit 1
+        fi
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        file: ./coverage.out
+        fail_ci_if_error: true
