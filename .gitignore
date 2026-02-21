@@ -1,0 +1,27 @@
+# Binaries
+bin/
+dist/
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Go
+*.test
+*.out
+vendor/
+
+# Coverage
+coverage.out
+coverage.html
+
+# Environment
+.env
+.env.local
