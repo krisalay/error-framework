@@ -201,15 +201,6 @@ Logger + StackTrace + TraceID
 Safe Client Response
 ```
 
-# Performance
-Benchmarks:
-```
-Wrap():             ~150ns/op
-Manager.Handle():   ~400ns/op
-No overhead on success path
-```
-Suitable for high-scale production services.
-
 # Comparison
 |Feature|	error-framework | native errors | pkg/errors |
 |---|---|---|---|
@@ -220,22 +211,6 @@ Suitable for high-scale production services.
 |Stack traces|	✓|	✓|	✓|
 |Logger integration|	✓|	✗|	✗|
 |Trace ID support|	✓|	✗|	✗|
-
-# Examples
-See:
-```
-examples/
-```
-Includes:
-- Echo REST API
-- Validation example
-- Database example
-
-# Documentation
-
-Full API documentation:
-
-https://pkg.go.dev/github.com/krisalay/error-framework
 
 # Versioning
 
