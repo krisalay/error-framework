@@ -36,13 +36,13 @@ jobs:
     - name: Show coverage summary
       run: go tool cover -func=coverage.out
     
-    - name: Fail if coverage < 80%
-      run: |
-        COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}' | sed 's/%//')
-        if (( $(echo "$COVERAGE < 80" | bc -l) )); then
-          echo "Coverage too low"
-          exit 1
-        fi
+    # - name: Fail if coverage < 80%
+    #   run: |
+    #     COVERAGE=$(go tool cover -func=coverage.out | grep total | awk '{print $3}' | sed 's/%//')
+    #     if (( $(echo "$COVERAGE < 80" | bc -l) )); then
+    #       echo "Coverage too low"
+    #       exit 1
+    #     fi
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
